@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="style.css" rel="stylesheet"/>
+    <title>Code Editor</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <label><i class="fab fa-html5"></i> Html</label>
+            <textarea id="html-code" onkeyup="run()"></textarea>
+
+            <label><i class="fab fa-css3-alt"></i> Css</label>
+            <textarea id="css-code" onkeyup="run()"></textarea>
+
+            <label><i class="fab fa-js"></i> JavaScript</label>
+            <textarea id="js-code" onkeyup="run()"></textarea>
+        </div>
+
+        <div class="right">
+            <label><i class="fas fa-play"></i> Output</label>
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function run() {
+            let htmlcode = document.getElementById("html-code").value;
+            let csscode = document.getElementById("css-code").value;
+            let jscode = document.getElementById("js-code").value;
+            let output = document.getElementById("output");
+            output.contentDocument.body.innerHTML = htmlcode;
+
+            // You can also include CSS and JavaScript in the iframe
+            output.contentDocument.head.innerHTML = `<style>${csscode}</style>`;
+            output.contentDocument.body.innerHTML = htmlcode;
+            output.contentWindow.eval(jscode);
+        }
+    </script>
+</body>
+</html>
